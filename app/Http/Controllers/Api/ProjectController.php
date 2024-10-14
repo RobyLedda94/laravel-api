@@ -9,7 +9,9 @@ use App\Models\Post;
 class ProjectController extends Controller
 {
     public function index(){
-        $posts = Post::all();
+        // $posts = Post::all();
+        // gestione delle pagine, indico che ci saranno 4 post per pagina
+        $posts = Post::paginate(9);
         return response()->json([
             'success' => true,
             'results' => $posts
