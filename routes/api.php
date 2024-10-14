@@ -2,6 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+// importo il controller
+use App\Http\Controllers\Api\ProjectController as ProjectController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +20,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// creo la rotta
+Route::get('/posts',[ProjectController::class, 'index'])->name('posts');
