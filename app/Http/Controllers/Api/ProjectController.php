@@ -17,4 +17,22 @@ class ProjectController extends Controller
             'results' => $posts
         ]);
     }
+
+    // creo un end point
+    public function show($slug)
+    {
+        $post = Post::with('technologies', 'types')->where('slug', $slug)->get();
+        // verifico che il post esista
+        if($post){
+            return response()->json([
+                'success' => true,
+                'result' => $post
+
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+        ]);
+    }
 }

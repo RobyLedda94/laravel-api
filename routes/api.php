@@ -22,4 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // creo la rotta
+Route::get('/posts/{slug}', [ProjectController::class, 'show'])->name('single_post');
 Route::get('/posts',[ProjectController::class, 'index'])->name('posts');
