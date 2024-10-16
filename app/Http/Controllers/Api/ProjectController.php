@@ -21,7 +21,7 @@ class ProjectController extends Controller
     // creo un end point
     public function show($slug)
     {
-        $post = Post::with('technologies', 'type')->where('slug', $slug)->get();
+        $post = Post::with('technologies', 'type')->where('slug', $slug)->first();
         // verifico che il post esista
         if($post){
             return response()->json([
