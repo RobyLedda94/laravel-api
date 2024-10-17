@@ -13,6 +13,8 @@ class NewContact extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $lead;
+
     /**
      * Create a new message instance.
      *
@@ -20,7 +22,7 @@ class NewContact extends Mailable
      */
     public function __construct()
     {
-        //
+        $this->lead = $_lead;
     }
 
     /**
@@ -31,7 +33,8 @@ class NewContact extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'New Contact',
+            subject: 'Nuovo contatto LaravelApi',
+            replyTo: $this->lead->email
         );
     }
 
@@ -43,7 +46,7 @@ class NewContact extends Mailable
     public function content()
     {
         return new Content(
-            view: 'view.name',
+            view: 'emails.contact-email',
         );
     }
 
