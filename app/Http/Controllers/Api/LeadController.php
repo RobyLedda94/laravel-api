@@ -30,5 +30,12 @@ class LeadController extends Controller
             'email.max' => 'L\' email non deve superare :max caratteri',
             'contact.max' => 'Il contatto non deve superare :max caratteri',
         ]);
+        // controllo degli errori
+        if($vadidator->fails()){
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()
+            ]);
+        }
     }
 }
