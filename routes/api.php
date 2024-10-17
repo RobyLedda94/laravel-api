@@ -26,4 +26,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // creo la rotta
 Route::get('/posts/{slug}', [ProjectController::class, 'show'])->name('single_post');
 Route::get('/posts',[ProjectController::class, 'index'])->name('posts');
-Route::get('/contacts', [LeadController::class, 'store'])->name('send_email');
+Route::post('/contacts', [LeadController::class, 'store'])->name('send_email');
