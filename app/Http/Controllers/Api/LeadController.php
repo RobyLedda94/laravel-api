@@ -5,7 +5,12 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator; // importo validator
+use Illuminate\Support\Facades\Mail;
 use App\Models\Lead; // utilizzo il model
+use App\Mail\NewContact;
+
+
+
 
 class LeadController extends Controller
 {
@@ -37,5 +42,18 @@ class LeadController extends Controller
                 'errors' => $validator->errors()
             ]);
         }
+        // se non ci sono errori creo un nuovo record nel db
+        $new_lead = new Lead();
+        $new_lead->fill($data);
+        $new_lead->save();
+
+        // invio la mail
+
+        Mail::to('info@laravelapi.it')->send(new NewContact($new_lead));
+
+        return respose()->json([
+            'success' => true,
+        ]);
+
     }
 }
